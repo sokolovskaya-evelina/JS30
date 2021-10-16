@@ -1,64 +1,104 @@
-@import url('https://fonts.googleapis.com/css?family=Muli&display=swap'); 
-
-* {
-  box-sizing: border-box;
+html {
+    box-sizing: border-box;
+    background: #fd9ce8;
+    font-family: 'helvetica neue', serif;
+    font-size: 20px;
+    font-weight: 200;
 }
 
 body {
-  font-family: 'Muli', sans-serif;
-  overflow: hidden;
-  margin: 0;
-  background: #111;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: #ffafbd; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffafbd, #ffc3a0); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #ffafbd, #ffc3a0);
+    margin: 0;
 }
 
-.container {
-  width: 100%;
-  display: flex;
-  padding: 0 20px;
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
-.slide {
-  height: 80vh;
-  border-radius: 20px;
-  margin: 10px;
-  cursor: pointer;
-  color: #fff;
-  box-shadow: inset 0 0 50px 0 rgba(0,0,0,0.5);
-  flex: 1;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  transition: all 0.5s ease-in-out;
+.panels {
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
 }
 
-.slide image {
-  z-index: -2;
+.panel {
+    background: #d07dfd;
+    box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center;
+    align-items: center;
+    /* Safari transitionend event.propertyName === flex */
+    /* Chrome + FF transitionend event.propertyName === flex-grow */
+    transition: font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+    flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+    background 0.2s;
+    font-size: 20px;
+    background-size: cover;
+    background-position: center;
+    flex: 1;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.slide h3 {
-  position: absolute;
-  font-size: 24px;
-  bottom: 20px;
-  left: 20px;
-  margin: 0;
-  opacity: 0;
+.panel1 {
+    background-image: url(https://images.unsplash.com/photo-1548848221-0c2e497ed557?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80);
 }
 
-.slide.active {
-  flex: 10;
+.panel2 {
+    background-image: url(https://images.unsplash.com/photo-1541717872011-9d16b87a5551?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60);
 }
 
-.slide.active h3 {
-  opacity: 1;
-  transition: opacity 0.3s ease-in 0.4s;
+.panel3 {
+    background-image: url(https://images.unsplash.com/photo-1499195333224-3ce974eecb47?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=648&q=80);
 }
 
+.panel4 {
+    background-image: url(https://images.unsplash.com/photo-1584296997775-97b09314e35a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1868&q=80);
+}
+
+.panel5 {
+    background-image: url(https://images.unsplash.com/photo-1616534900631-c875e41ab2c8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1032&q=80);
+}
+
+/* Flex Children */
+.panel > * {
+    margin: 0;
+    width: 100%;
+    transition: transform 0.5s;
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel > *:first-child {
+    transform: translateY(-100%)
+}
+
+.panel.open-active > *:first-child {
+    transform: translateY(0);
+}
+
+.panel > *:last-child {
+    transform: translateY(100%)
+}
+
+.panel.open-active > *:last-child {
+    transform: translateY(0)
+}
+
+.panel p {
+    text-transform: uppercase;
+    font-family: 'Amatic SC', cursive;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+    font-size: 2em;
+}
+
+.panel p:nth-child(2) {
+    font-size: 4em;
+}
+
+.panel.open {
+    flex: 5;
+    font-size: 40px;
+}
